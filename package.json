@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/diana-a13/proiect_flamingos#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "mysql": "^2.17.1"
   }
 }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Aplicatie RATB</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" type="text/css" href="app.css">
+</head>
+<body>
+
+ <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Aplicatie RATB</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="acasa"><a href="#">Acasa</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="file:///C:/Program%20Files/Sublime%20Text%203/gallery/htmlForm.html">Inregistrare  <i class="fa fa-user-plus"></i></a></li>
+        <li><a href="#contnou">Cont nou  <i class="fa fa-user"></i></a></li>
+      </ul>
+    </div>
+  </div>
+ </nav>
+
+ <div class="container">
+ 	<div class="row">
+ 		<div class="col-lg-6">
+ 			<div class="content">
+ 				<hr>
+        <h1 id="titlu">
+          Titlu aplicatie
+        </h1>
+ 				
+ 				 <select class="form-control" id="exampleFormControlSelect1">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+    
+ 				<button id="button" class="btn btn-default btn-lg"></i> Comentariu Nou</button>
+        
+        
+        <ul class="list-group">
+           <li class="list-group-item "><i class="fa fa-user" aria-hidden="true"></i> Primul comentariu</li>
+        </ul>
+      </hr>
+ 			</div>
+ 		</div>
+ 	</div>
+ </div>
+<script>
+  var button=document.getElementById("button");
+  button.addEventListener("click", function() {
+  var li = document.createElement("li");
+  var ul=document.getElementById(list-group);
+li.className = "list-group-item";
+li.appendChild(document.createTextNode("testing"));
+ul.appendChild(li);
+});
+
+</script>
+ <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+ <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+  
+    #titlu{ padding-top: 20px;
+
+                            }
+
+
+</style>
+</body>
+</html>
