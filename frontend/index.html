@@ -8,6 +8,7 @@
 
 	<link rel="stylesheet" type="text/css" href="app.css">
 </head>
+
 <body>
 
  <nav class="navbar navbar-default navbar-fixed-top">
@@ -26,8 +27,8 @@
         <li class="acasa"><a href="#">Acasa</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="file:///C:/Program%20Files/Sublime%20Text%203/gallery/htmlForm.html">Inregistrare  <i class="fa fa-user-plus"></i></a></li>
-        <li><a href="#contnou">Cont nou  <i class="fa fa-user"></i></a></li>
+        <li><a id="signInBtn" href="file:///C:/Program%20Files/Sublime%20Text%203/gallery/htmlForm.html">Inregistrare  <i class="fa fa-user-plus"></i></a></li>
+        <li><a id="signUpBtn" href="#contnou">Cont nou  <i class="fa fa-user"></i></a></li>
       </ul>
     </div>
   </div>
@@ -42,7 +43,8 @@
           Titlu aplicatie
         </h1>
  				
- 				 <select class="form-control" id="exampleFormControlSelect1">
+ 				 <select id="select_control" class="form-control" id="exampleFormControlSelect1">
+ 				   
       <option>1</option>
       <option>2</option>
       <option>3</option>
@@ -50,12 +52,31 @@
       <option>5</option>
     </select>
     
- 				<button id="button" class="btn btn-default btn-lg"></i> Comentariu Nou</button>
+    <input type="text" id="inputComentarii" name="Comentariu" style="width:300px; height:150px; font-size:14pt;"/>
+    		<button onclick = "addCom()" id="button" class="btn btn-default btn-lg"></i> Comentariu Nou</button>
+       
         
+        <script>
+        function addCom(){
+            var text = document.getElementById("inputComentarii").value;
+            var li = "<li>" + text + "</li>";
+            document.getElementById("list").insertAdjacentHTML('beforeend',li);
+            document.getElementById("inputComentarii").value="";
+          }
+        </script>
         
-        <ul class="list-group">
-           <li class="list-group-item "><i class="fa fa-user" aria-hidden="true"></i> Primul comentariu</li>
+        <ul class="list-group">      
+
+           <li class="list-group-item "><i class="fa fa-user" aria-hidden="true">
+             <ul 
+                id='list'>
+               </ul>
+           </i>
+                    
+               </li>
         </ul>
+          
+
       </hr>
  			</div>
  		</div>

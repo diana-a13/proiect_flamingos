@@ -1,29 +1,76 @@
 const express = require('express')
 const app = express()
 const fs = require("fs")
-app.use('/', express.static('frontend'))
+
+var mysql = require('mysql');
+
+app.use(express.urlencoded({extended:true}));
+
+app.use(express.static('frontend'))
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static('public'));
+
+var connection = mysql.createConnection({
+
+  host     : 'localhost',
+  user     : 'flamingos',
+  password : 'parolaflamingi',
+  database : 'FlamingosDB'
+
+});
+connection.connect();
 
 //get auth
 
 //post comentariu
-app.post('/comentarii', function(request,response){
-    console.log(request)
-    console.log(request.body)
-    response.send('This is POST/ comentarii')
+app.get('/signup', (req, res) => {
+    var fileContent = fs.readFileSync('frontend/signup.html')
+    res.type('signup.html').send(fileContent);
 })
 
-//get transport
-app.get('/transport', function(req,response){
-    //sa citesc fisierul frontend/transport.html de pe disc
-    var fileContent = fs.readFileSync('frontend/transport.html')
-    //sa ii returnez continutul in response
-    response.type('text/html').send(fileContent)
-}) 
-
-
-//GET/ messages/:id
-app.get('/transport/:id', (req, res)=>{
-    res.send('This is GET/transport/'+req.params.id)
+app.get('/login', (req, res) => {
+    var fileContent = fs.readFileSync('frontend/login.html')
+    res.type('login.html').send(fileContent);
 })
+
+//app.post('/login', (req,res) => {
+//    res.redirect('');
+//})
+
+app.post('/login', function(req, res) {
+
+    var subject = req.body.subject;
+    var message = req.body.message;
+    var fileContent = fs.readFileSync('frontend/index.html')
+    res.type('index.html').send(fileContent);
+    
+});
+
+/*
+app.post('/signup', (req,res) => {
+    successRedirect : '/index' 
+    failureRedirect : '/signup' 
+    failureFlash : true
+})
+*/
+
+app.post('/signup', (req, res) => {
+ // var username=req.body.name;
+    connection.query(("INSERT INTO `users` (id, email, password) VALUES (?)",1, req.body.email, req.body.password), function(err, result){
+        if(err) throw err;
+            console.log("1 record inserted");
+        });
+     var fileContent = fs.readFileSync('frontend/index.html')
+    res.type('index.html').send(fileContent);
+   
+});
+
+app.get('/home', function(request, res) {
+    var fileContent = fs.readFileSync('frontend/index.html')
+    res.type('index.html').send(fileContent);
+});
 
 app.listen(3000)
