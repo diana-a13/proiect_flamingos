@@ -18,7 +18,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'flamingos',
   password : 'parolaflamingi',
-  database : 'FlamingosDB'
+  database : 'FlamingoDB'
 
 });
 connection.connect();
