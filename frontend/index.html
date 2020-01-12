@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+
 	<title>Aplicatie RATB</title>
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -9,10 +12,17 @@
 	<link rel="stylesheet" type="text/css" href="app.css">
 </head>
 
+
+
 <body>
+    
+        
+
+    
 
  <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
+
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -27,14 +37,18 @@
         <li class="acasa"><a href="#">Acasa</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a id="signInBtn" href="file:///C:/Program%20Files/Sublime%20Text%203/gallery/htmlForm.html">Inregistrare  <i class="fa fa-user-plus"></i></a></li>
-        <li><a id="signUpBtn" href="#contnou">Cont nou  <i class="fa fa-user"></i></a></li>
+        <li>
+            <div><a id="signInBtn" href="login.html">Autentificare  <i class="fa fa-user"> </i>  </a></div>
+            <div><a id="signUpBtn" href="signup.html">Cont nou  <i class="fa fa-user-plus"> </i>  </a></div>
+      </li>
+        
       </ul>
     </div>
   </div>
  </nav>
 
  <div class="container">
+
  	<div class="row">
  		<div class="col-lg-6">
  			<div class="content">
@@ -58,22 +72,31 @@
         
         <script>
         function addCom(){
-            var text = document.getElementById("inputComentarii").value;
-            var li = "<li>" + text + "</li>";
-            document.getElementById("list").insertAdjacentHTML('beforeend',li);
+            var input = document.getElementById("inputComentarii");
+            var ul = document.getElementById("listaComentarii");
+            var li = document.createElement("li");
+            li.className = 'list-group-item';
+            li.textContent = input.value;
+            ul.appendChild(li);
             document.getElementById("inputComentarii").value="";
           }
         </script>
         
-        <ul class="list-group">      
 
-           <li class="list-group-item "><i class="fa fa-user" aria-hidden="true">
-             <ul 
-                id='list'>
-               </ul>
-           </i>
-                    
-               </li>
+        <ul id="listaComentarii" class="list-group"> 
+        <style>
+            ul.list-group
+            li:before {
+  content: "\f007  "; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+  
+        }
+        </style>
+        
+  
+    
+       
+           
         </ul>
           
 
@@ -93,6 +116,9 @@ ul.appendChild(li);
 });
 
 </script>
+
+
+
  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <style type="text/css">

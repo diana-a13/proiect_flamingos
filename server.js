@@ -4,6 +4,17 @@ const fs = require("fs")
 
 var mysql = require('mysql');
 
+
+
+
+
+//adaugat de mine
+
+//require('dotenv').config();
+
+
+
+
 app.use(express.urlencoded({extended:true}));
 
 app.use(express.static('frontend'))
@@ -49,13 +60,30 @@ app.post('/login', function(req, res) {
     
 });
 
-/*
+
+
 app.post('/signup', (req,res) => {
     successRedirect : '/index' 
     failureRedirect : '/signup' 
     failureFlash : true
 })
+
+
+
+
+/*
+//ce am adaugat eu
+app.post('/signup',function(req,res,next)
+{
+    console.log(req.body.email);
+    res.render('/signup',{title: 'SignUp Complete'});
+})
 */
+
+
+
+
+
 
 app.post('/signup', (req, res) => {
  // var username=req.body.name;
