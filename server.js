@@ -24,6 +24,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('public'));
 
+//DB Connection
+require("./src/database/connection");
+
+require("./src/bootstrap")();
+
+/*
 var connection = mysql.createConnection({
 
   host     : 'localhost',
@@ -32,8 +38,9 @@ var connection = mysql.createConnection({
   database : 'FlamingoDB'
 
 });
-connection.connect();
 
+connection.connect();
+*/
 //get auth
 
 //post comentariu

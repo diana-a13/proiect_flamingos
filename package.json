@@ -19,6 +19,9 @@
   "homepage": "https://github.com/diana-a13/proiect_flamingos#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mysql": "^2.17.1"
+    "mysql": "^2.17.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.1",
+    "sequelize-cli": "^5.5.1"
   }
 }
