@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -16,6 +19,7 @@ body {
 .container {
   padding: 16px;
   background-color: white;
+  background-color:transparent;
 }
 
 /* Full-width input fields */
@@ -35,7 +39,7 @@ input[type=text]:focus, input[type=password]:focus {
 
 /* Overwrite default styles of hr */
 hr {
-  border: 1px solid #f1f1f1;
+  
   margin-bottom: 25px;
 }
 
@@ -47,7 +51,6 @@ hr {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
   opacity: 0.9;
 }
 
@@ -67,35 +70,42 @@ a {
 }
 </style>
 </head>
-<body>
+<body style="background-image: url('https://images.pexels.com/photos/735795/victoria-station-busy-people-victoria-735795.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+     background-size: cover;
+    background-position: center;">
 
-<form method="post">
+<form method="POST" action="/signup">
   <div class="container">
-    <h1>Inregistrare</h1>
-    <p>Completati formularul pentru a crea un cont.</p>
+     <hr>
+      <label for="nume_utilizator" style="font-size: 20px; font-family: 'Times New Roman',Times, serif;
+      color: rgb(210,157,112); text-shadow:1px 1px black;"><b>Nume utilizator</b></label>
+    <input type="text" placeholder="Introduceti Nume utilizator" name="nume" required>
+
+    <label for="email" style="font-size: 20px; font-family: 'Times New Roman',Times, serif;
+      color: rgb(210,157,112); text-shadow:1px 1px black;"><b>Email</b></label>
+    <input type="text" placeholder="Introduceti Email" name="email" required>
+
+    <label for="psw" style="font-size: 20px; font-family: 'Times New Roman',Times, serif;
+      color: rgb(210,157,112); text-shadow:1px 1px black;"><b>Parola</b></label>
+    <input  type="password" placeholder="Introduceti Password" name="psw" required>
+
+    <label for="psw-repeat" style="font-size: 20px; font-family: 'Times New Roman',Times, serif;
+      color: rgb(210,157,112); text-shadow:1px 1px black;"><b>Reintroduceti parola</b></label>
+    <input type="password" placeholder="Reintroduceti Password" name="psw-repeat" required>
     <hr>
+    <p style="font-size: 15px; font-family: 'Times New Roman',Times, serif;
+      color: rgb(210,157,112); text-shadow:1px 1px black;">Prin crearea contului sunteti de acord cu <a href="#">Terms & Privacy</a>.</p>
 
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Introduceti Email" 
-    name="email" required>
-
-    <label for="psw"><b>Parola</b></label>
-    <input type="password" placeholder="Introduceti Password" 
-    name="psw" required>
-
-    <label for="psw-repeat"><b>Reintroduceti parola</b></label>
-    <input type="password" placeholder="Reintroduceti Password" 
-    name="psw-repeat" required>
-    <hr>
-    <p>Prin crearea contului sunteti de acord cu <a href="#">Terms & Privacy</a>.</p>
-
+<span>
     <button type="submit" class="registerbtn">Creati cont</button>
   </div>
   
   <div class="container signin">
-    <p>Aveti deja un cont? <a href="login.html">Sign in</a>.</p>
+    <p >Aveti deja un cont? <a href="/">Sign in</a>.</p>
   </div>
+  
+  </span>
+  
 </form>
-
 </body>
 </html>

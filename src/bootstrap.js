@@ -19,7 +19,7 @@ module.exports = async() =>{
     
     const c1 = await comentarii.create({id_user: u1.id, id_transport: t1.id_statie, com: "Minunat"}).catch(errHandler);
     
-//    const users = await user.findAll({ where: { nume: "Louis" }, include: [ {model: comentarii, as: "ComentariiU"} ] }).catch(errHandler);   
+    const users = await user.findAll({ where: { nume: "Louis" }, include: [ {model: comentarii, as: "ComentariiU"} ] }).catch(errHandler);   
     
 //    console.log("Louis Comentarii: ", users);
     

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style type="text/css">
         
     /* Bordered form */
-form {
-  border: 3px solid #f1f1f1;
-}
+
 
 /* Full-width inputs */
 input[type=text], input[type=password] {
@@ -27,7 +25,7 @@ button {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+  
 }
 
 /* Add a hover effect for buttons */
@@ -49,7 +47,6 @@ button:hover {
 
 /* The "Forgot password" text */
 span.psw {
-  float: right;
   padding-top: 16px;
 }
 
@@ -61,29 +58,38 @@ span.psw {
   }
   .cancelbtn {
     width: 100%;
-  }
+   }
 }
     
     </style>
+</head>
+
+<body style="background-image: url('https://images.pexels.com/photos/735795/victoria-station-busy-people-victoria-735795.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+     background-size: cover;
+    background-position: center;">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<form action="login" method="post">
+<form action="/login"  method="post">
  
   <div class="container">
-    <label for="uname"><b>Username</b></label>
+    <label for="uname" style="font-size: 20px; font-family: 'Times New Roman',Times, serif;
+      color: rgb(210,157,112); text-shadow:1px 1px black;"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="uname" required>
 
-    <label for="psw"><b>Password</b></label>
+    <label for="psw" style="font-size: 20px; font-family: 'Times New Roman',Times, serif;
+      color: rgb(210,157,112); text-shadow:1px 1px black;"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
 
-    <button type="submit" class="btn btn-primary" id="loginBtn">Login</button>
-    <label>
+    <button type="submit" class="btn btn-succes" id="loginBtn">Login</button>
+    <label style="font-size: 15px; font-family: 'Times New Roman',Times, serif;
+      color: rgb(210,157,112); text-shadow:1px 1px black;">
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
   </div>
 
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
+  <div class="container" style="background-color:transparent">
+    <button type="button" class="btn btn-danger" 
+      >Cancel</button>
   </div>
 </form>
 </body>
