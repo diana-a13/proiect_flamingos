@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 const fs = require("fs")
 var mysql = require('mysql');
-
+//var document=require('./index.html');
+const Sequelize = require("sequelize");
 app.use(express.urlencoded({extended:true}));
 
 app.use(express.static('login'))
@@ -18,9 +19,10 @@ var conn = mysql.createConnection({
    host: 'localhost',
    user: 'root',
    password: '',
-   database        : 'FlamingosDB'
+   database: 'FlamingosDB'
 });
-//conn.connect();
+
+
 /*
 var pool        = mysql.createPool({
     connectionLimit : 10, // default = 10
@@ -31,7 +33,7 @@ var pool        = mysql.createPool({
 });
 */
 //DB Connection
-//let conn = require("./src/database/connection");
+let seq = require("./src/database/connection");
 
 //require("./src/bootstrap")();
 
@@ -43,8 +45,41 @@ app.get('/', (req, res) => {
 });
 
 app.get('/index.html', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
+    //res.sendFile(__dirname + '/index.html');
+    /*conn.query('SELECT * FROM comentariis', function(err, rows) {
+        if(err) { console.log(err); }
+        else
+        {
+     res.json(rows);
+     console.log(rows); }
+   });*/
+   
+   conn.connect(function(err) {
+  if (err) throw err;
+  // if connection is successful
+  conn.query("SELECT * FROM comentariis", function (err, result, fields) {
+    // if any error while executing above query, throw error
+    if (err) throw err;
+    // if there is no error, you have the result
+    // iterate for all the rows in result
+    Object.keys(result).forEach(function(key) {
+      var row = result[key];
+      console.log(row.id_transport);
+      console.log(row.com);
+      
+      var data=row.id_transport+" - " +row.com;
+      //document.getElementById("afisare").innerHTML=data;
+      console.log(data);
+    });
+  });
 });
+   
+   
+   res.sendFile(__dirname + '/index.html');
+});
+
+
+
 app.get('/login', function (req, res) {
     res.sendFile(__dirname + '/login.html');
 });
@@ -83,6 +118,7 @@ app.post('/login', function (req, res) {
   }
 });
 
+
 let id = 1111;
 
 app.post('/index', function(req, res) {
@@ -100,39 +136,101 @@ app.post('/index', function(req, res) {
         });
  
 });
-/*
-app.post('/index', function (req, res) {
-  var post = req.body;
-  console.log(post);
-  var sql = 'INSERT INTO comentariis (id_user, id_transport, com) VALUES (?), (?), (?)' [id, post.numar_auto, post.com];
-//    var sql = "INSERT INTO comentariis (id_user, id_transport, com)VALUES('"+id+"','"+parseInt(post.numar_auto)+"','"+post.com+"')";
-        conn.query(sql, function(err, result)  {
-            if(err) console.log(err);
-        });
-        id+1;
-        res.redirect('/index');
-});
-*/
-/*
-app.post('/login', function(request, response) {
-	var username = request.body.uname;
-	var password = request.body.psw;
-	if (username && password) {
-		conn.query('SELECT * FROM users WHERE nume = ? AND parola = ?', [username, password], function(error, results, fields) {
-			if (results.length > 0) {
-				request.session.loggedin = true;
-				request.session.nume = username;
-				response.redirect('/index');
-			} else {
-				response.send('Incorrect Username and/or Password!');
-			}			
-			response.end();
-		});
-	} else {
-		response.send('Please enter Username and Password!');
-		response.end();
+
+
+module.exports = async() =>{
+const Comentarii = require("./modules/comentarii");
+const Transport = require("./modules/transport");
+const Users = require("./modules/users");
+    
+Users.hasMany(Comentarii, { as: "ComentariiU", foreignKey: "id" });
+Transport.hasMany(Comentarii, { as:"ComentariiT", foreignKey: "id_statie" });
+Comentarii.belongsTo (Users, {as: "User", foreignKey: "id"});
+Comentarii.belongsTo(Transport, {as:"Transport", foreignKey: "id_statie"});
+
+
+//creaza tabela
+ app.post('/create', async (req, res) => {
+     try{
+         await seq.sync({force: true});
+         res.status(201).json({message: 'created'});
+     }
+     catch(err){
+         console.warn(err);
+         res.status(500).json({message: 'server error'});
+     }
+ });
+ 
+app.get('/comantarii', async(req,res)=>{
+        try{
+		let comentarii = await Comentarii.findAll()
+		res.status(200).json(comentarii)
+	}
+	catch(e){
+		console.warn(e)
+		res.status(500).json({message : 'server error'})
 	}
 });
-*/
 
+app.post('/transporturi', async(req,res)=>{
+        try{
+            await Transport.create(req.body);
+            res.status(200).json({message: 'created'});
+        }catch(err){
+            console.warn(err);
+         res.status(500).json({message: 'server error'});
+            
+        }
+});
+
+app.get('/comentarii/:id', async(req,res)=>{
+    try{
+		let comentariu = await Comentarii.findById(req.params.id)
+		if (comentariu){
+			res.status(200).json(comentariu)
+		}
+		else{
+			res.status(404).json({message : 'not found'})
+		}
+	}
+	catch(e){
+		console.warn(e)
+		res.status(500).json({message : 'server error'})
+	}
+});
+app.put('/comentarii/:id', async(req,res)=>{
+    try{
+		let comentariu = await Comentarii.findByPk(req.params.id)
+		if (comentariu){
+			await comentariu.update(req.body)
+			res.status(202).json({message : 'accepted'})
+		}
+		else{
+			res.status(404).json({message : 'not found'})
+		}
+	}
+	catch(e){
+		console.warn(e)
+		res.status(500).json({message : 'server error'})
+	}
+});
+app.delete('/comentarii/:id', async(req,res)=>{
+    try{
+		let comentariu = await Comentarii.findById(req.params.id)
+		if (comentariu){
+			await comentariu.destroy()
+			res.status(202).json({message : 'accepted'})
+		}
+		else{
+			res.status(404).json({message : 'not found'})
+		}
+	}
+	catch(e){
+		console.warn(e)
+		res.status(500).json({message : 'server error'})
+	}
+});
+
+
+}
 app.listen(3000)
