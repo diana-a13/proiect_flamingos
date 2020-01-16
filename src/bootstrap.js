@@ -13,15 +13,15 @@ module.exports = async() =>{
         console.error("Error: ", err);
     }
     
-    const u1 = await user.create({ nume: "Louis", parola: "parolaLouis", email: "louis-email"}).catch(errHandler); 
+    const u1 = await user.create({ nume: "Louise", parola: "parolaLouise", email: "louise-email"}).catch(errHandler); 
     
     const t1 = await transport.create({id_statie: 300, statie_plecare: "Clabucet", statie_sosire: "Complex Baneasa"}).catch(errHandler);
     
-    const c1 = await comentarii.create({id_user: u1.id, id_transport: t1.id_statie, com: "Minunat"}).catch(errHandler);
+    const c1 = await comentarii.create({id_user: u1.id, id_transport: t1.id_statie, com: "Curat si ingrijit"}).catch(errHandler);
     
-    const users = await user.findAll({ where: { nume: "Louis" }, include: [ {model: comentarii, as: "ComentariiU"} ] }).catch(errHandler);   
+    const users = await user.findAll({ where: { nume: "Louise" }, include: [ {model: comentarii, as: "ComentariiU"} ] }).catch(errHandler);   
     
-//    console.log("Louis Comentarii: ", users);
+   console.log("Louise Comentarii: ", users);
     
     
     

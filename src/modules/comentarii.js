@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+let sequelize = require('/home/ubuntu/environment/p/proiect_flamingos/src/database/connection');
 
 module.exports = sequelize.define("comentarii",{
      id: {

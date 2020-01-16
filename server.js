@@ -1,16 +1,17 @@
 const express = require('express')
+//const routes = require('./routes/api');
 const app = express()
 const fs = require("fs")
 var mysql = require('mysql');
-//var document=require('./index.html');
 const Sequelize = require("sequelize");
+var bodyParser = require('body-parser');
+
+//init routes
+app.use('/api', require('./routes/api'));
+app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-app.use(express.static('login'))
-
-var bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static('login'));
 
 app.use(express.static('../', {index: 'login.html'}))
 
@@ -45,14 +46,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/index.html', function (req, res) {
-    //res.sendFile(__dirname + '/index.html');
-    /*conn.query('SELECT * FROM comentariis', function(err, rows) {
+    res.sendFile(__dirname + '/index.html');
+  /*  conn.query('SELECT * FROM comentariis', function(err, rows) {
         if(err) { console.log(err); }
         else
         {
      res.json(rows);
      console.log(rows); }
-   });*/
+   });
    
    conn.connect(function(err) {
   if (err) throw err;
@@ -72,11 +73,9 @@ app.get('/index.html', function (req, res) {
       console.log(data);
     });
   });
+});*/
 });
    
-   
-   res.sendFile(__dirname + '/index.html');
-});
 
 
 
@@ -137,100 +136,4 @@ app.post('/index', function(req, res) {
  
 });
 
-
-module.exports = async() =>{
-const Comentarii = require("./modules/comentarii");
-const Transport = require("./modules/transport");
-const Users = require("./modules/users");
-    
-Users.hasMany(Comentarii, { as: "ComentariiU", foreignKey: "id" });
-Transport.hasMany(Comentarii, { as:"ComentariiT", foreignKey: "id_statie" });
-Comentarii.belongsTo (Users, {as: "User", foreignKey: "id"});
-Comentarii.belongsTo(Transport, {as:"Transport", foreignKey: "id_statie"});
-
-
-//creaza tabela
- app.post('/create', async (req, res) => {
-     try{
-         await seq.sync({force: true});
-         res.status(201).json({message: 'created'});
-     }
-     catch(err){
-         console.warn(err);
-         res.status(500).json({message: 'server error'});
-     }
- });
- 
-app.get('/comantarii', async(req,res)=>{
-        try{
-		let comentarii = await Comentarii.findAll()
-		res.status(200).json(comentarii)
-	}
-	catch(e){
-		console.warn(e)
-		res.status(500).json({message : 'server error'})
-	}
-});
-
-app.post('/transporturi', async(req,res)=>{
-        try{
-            await Transport.create(req.body);
-            res.status(200).json({message: 'created'});
-        }catch(err){
-            console.warn(err);
-         res.status(500).json({message: 'server error'});
-            
-        }
-});
-
-app.get('/comentarii/:id', async(req,res)=>{
-    try{
-		let comentariu = await Comentarii.findById(req.params.id)
-		if (comentariu){
-			res.status(200).json(comentariu)
-		}
-		else{
-			res.status(404).json({message : 'not found'})
-		}
-	}
-	catch(e){
-		console.warn(e)
-		res.status(500).json({message : 'server error'})
-	}
-});
-app.put('/comentarii/:id', async(req,res)=>{
-    try{
-		let comentariu = await Comentarii.findByPk(req.params.id)
-		if (comentariu){
-			await comentariu.update(req.body)
-			res.status(202).json({message : 'accepted'})
-		}
-		else{
-			res.status(404).json({message : 'not found'})
-		}
-	}
-	catch(e){
-		console.warn(e)
-		res.status(500).json({message : 'server error'})
-	}
-});
-app.delete('/comentarii/:id', async(req,res)=>{
-    try{
-		let comentariu = await Comentarii.findById(req.params.id)
-		if (comentariu){
-			await comentariu.destroy()
-			res.status(202).json({message : 'accepted'})
-		}
-		else{
-			res.status(404).json({message : 'not found'})
-		}
-	}
-	catch(e){
-		console.warn(e)
-		res.status(500).json({message : 'server error'})
-	}
-});
-
-
-}
-app.listen(3000)
+app.listen(3000);
